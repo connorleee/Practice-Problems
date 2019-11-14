@@ -38,7 +38,6 @@ function getClosingParen(sentence, openingParenIndex) {
 
             openParens -= 1;
         }
-
     }
     
     throw new Error("error")
