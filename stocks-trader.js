@@ -1,24 +1,25 @@
 function getMaxProfit(stockPrices) {
-
     // Calculate the max profit
-    let bestProfit = 0
 
-    for (let i = 0; i < stockPrices.length; i++) {
-        const currentPrice = stockPrices[i];
-
-        for (let j = i + 1; j < stockPrices.length; j++) {
-            const comparedPrice = stockPrices[j];
-            if(comparedPrice - currentPrice > bestProfit){
-                bestProfit = comparedPrice - currentPrice;
-            }
-        }
+    if (stockPrices.length < 2) {
+        throw new Error("Must be more than one stock price in a day");
     }
 
-    return bestProfit;
+    let minPrice = stockPrices[0];
+    let maxProfit = stockPrices[1] - stockPrices[0];
+
+    for (let i = 1; i < stockPrices.length; i++) {
+        const currentPrice = stockPrices[i];
+
+        let currentProfit = currentPrice - minPrice;
+
+        maxProfit = Math.max(currentProfit, maxProfit);
+
+        minPrice = Math.min(currentPrice, minPrice);
+    }
+
+    return maxProfit;
 }
-
-
-
 
 
 // Tests
