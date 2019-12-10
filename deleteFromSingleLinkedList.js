@@ -14,7 +14,8 @@ function deleteNode(nodeToDelete) {
         nodeToDelete.value = nextNode.value;
         nodeToDelete.next = nextNode.next;
     } else {
-        throw new Error("Can't delete last node using this method")
+        throw new Error("Can't delete last node using this method
+        ")
     }
 
 }
