@@ -3,6 +3,7 @@ const modules = [141107, 119016, 145241, 72264, 116665, 81420, 88513, 128809, 14
 function fuelCalc(mass) { 
     let fuel = Math.floor(mass / 3) - 2;
     
+    // Recursively run fuelCalc and add to previous fuel amount until no extra fuel is needed 
     return fuel > 0 ? fuel + fuelCalc(fuel) : 0;
 }
 
