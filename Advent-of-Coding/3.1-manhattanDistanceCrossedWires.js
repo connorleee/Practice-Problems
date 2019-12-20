@@ -51,11 +51,21 @@ function storeLocations(commandArr) {
 
         // Add to locations visited map. If location has been visited, add it to the same key distance
         if(locationsVisited.has(distance)){
-            locationsVisited.set(distance,[locationsVisited.get(distance), nextLoc])
+            locationsVisited.set(distance,[...locationsVisited.get(distance), nextLoc])
         } else {
-            locationsVisited.set(distance, nextLoc);
+            locationsVisited.set(distance, [nextLoc]);
         }
     }
+}
+
+function findClosestIntersection(mapObject){
+    for (const key of mapObject.keys()) {
+        if(mapObject.get(key).length > 1) {
+            return key
+        }   
+    }
+
+    return null
 }
 
 // let testLocation = [100,50];
@@ -65,17 +75,8 @@ function storeLocations(commandArr) {
 storeLocations(w1);
 storeLocations(w2);
 
+// Sort the locations Map by distance to pick the lowest distance with a colision 
 let sortedLocationsVisited = new Map([...locationsVisited.entries()].sort((a,b) => a[0] > b[0] ? 1 : a[0] < b[0] ? -1 : 0));
-
-function findClosestIntersection(mapObject){
-    for (const key of mapObject.keys()) {
-        if(mapObject.get(key).length > 2) {
-            return key
-        }   
-    }
-
-    return null
-}
 
 // console.log(locationsVisited)
 console.log(sortedLocationsVisited)
