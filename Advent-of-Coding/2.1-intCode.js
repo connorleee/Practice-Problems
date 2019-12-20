@@ -34,3 +34,5 @@ function runIntCode(intCodeArr) {
 // console.log(runIntCode([2,4,4,5,99,0]));
 // console.log(runIntCode([1,1,1,4,99,5,6,0,99]));
 console.log(`first value in new intCode: ${runIntCode(intCode)[0]}`);
+
+module.exports = runIntCode;
