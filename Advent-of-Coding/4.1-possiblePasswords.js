@@ -5,44 +5,69 @@ const input = fs.readFileSync("./Puzzle-Inputs/4.1-possiblePasswords.txt", "utf8
 
 const rangeSeparator = input.indexOf("-");
 
-const inputLowerBound = parseInt(input.slice(0,rangeSeparator));
+const inputLowerBound = parseInt(input.slice(0, rangeSeparator));
 const inputUpperBound = parseInt(input.slice(rangeSeparator + 1));
 
-function adjacentCheck(pw) {
+// This function tests an individual password against the problem criteria 
+function pwValidCheck(pw) {
     let pwString = pw.toString();
 
-    for (let i = 0; i < pwString.length; i++) {
-        if(pwString[i] === pwString[i+1]){
-            for (let j = i+1; j < pwString.length; j++) {
-                if(pwString[j] === pwString[j+1]){return false}
-            }
+    // check for length
+    if (pwString.length !== 6) { return false }
 
-            return true
+    let valueToBeLargerThan = parseInt(pwString[0]);
+
+    let consecDigFlag = false; // used to check if there is at least on set of consecutive numbers
+
+    for (let i = 0; i <= pwString.length; i++) {
+        // Check for increasing values
+        if (parseInt(pwString[i]) < valueToBeLargerThan) { return false }
+
+        valueToBeLargerThan = parseInt(pwString[i]);
+
+        // Test for consecutive digits
+        if (pwString[i] === pwString[i + 1]) {
+            consecDigFlag = true;
         }
     }
 
-    return false
+    if (consecDigFlag === true) {
+        return true
+    } else {return false}
 }
 
+// This function tests all passwords in the input range and returns the number of usable passwords
 function numPossiblePasswords(lowerBound, upperBound) {
     let possiblePasswords = [];
-    let numPasswords = 0;
 
     for (let pw = lowerBound; pw < upperBound; pw++) {
-        if(adjacentCheck(pw)){
+        if (pwValidCheck(pw)) {
             possiblePasswords.push(pw);
-            numPasswords++
         }
     }
 
-    return numPasswords;
+    return possiblePasswords.length;
 }
 
-// console.log(adjacentCheck(inputLowerBound))
-// console.log(adjacentCheck(inputUpperBound))
-// console.log(adjacentCheck(1220347))
-// console.log(adjacentCheck(1222347))
-// console.log(adjacentCheck(1223447))
+// console.log(pwValidCheck(inputLowerBound))
+// console.log(pwValidCheck(inputUpperBound))
+// console.log(pwValidCheck(128888))
+// console.log(pwValidCheck(177889))
+// console.log(pwValidCheck(1223447))
 
 console.log(numPossiblePasswords(inputLowerBound, inputUpperBound));
-console.log(numPossiblePasswords(1000, 1034));
+
+
+
+
+// const matching = [];
+// for(let i = 178416; i <= 676461; i++) {
+//   const s = i.toString();
+//   const a = [...s];
+
+//   if(s.length == 6 && /(.)\1/.test(s) && s == a.sort().join``){
+//     matching.push(s)
+//   }
+// }
+
+// console.log(matching.length)
