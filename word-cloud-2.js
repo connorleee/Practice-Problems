@@ -27,7 +27,10 @@ class WordCloudData {
                 // map the word
                 // add word to map if it hasn't been in before
                 if (!this.wordsToCounts.has(word)) {
-                    this.wordsToCounts.set(word, 1); //adds word and sets value to 1
+                    //check if there is a lower case version of word or letter
+                    if(!this.wordsToCounts.has(word.toLowerCase)){
+                        this.wordsToCounts.set(word, 1); //adds word and sets value to 1
+                    }
                 } else {
                     this.wordsToCounts.set(word, this.wordsToCounts.get(word) + 1);
                 }
@@ -36,7 +39,7 @@ class WordCloudData {
             }
         }
 
-        // console.log(this.wordsToCounts.entries())
+        console.log(this.wordsToCounts.entries())
     }
 }
 
