@@ -43,6 +43,10 @@ class WordCloudData {
     }
 }
 
+//Helper function for letter check
+function isLetter(character) {
+    return 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(character) >= 0;
+  }
 
 
 
