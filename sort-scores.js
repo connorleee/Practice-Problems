@@ -1,8 +1,26 @@
 function sortScores(unorderedScores, highestPossibleScore) {
 
     // Sort the scores in O(n) time
+
+    //create a new array where the index is the score and the value is frequency of the score
+    const scoreFrequency = new Array(highestPossibleScore + 1).fill(0); 
+
+    // populate the scoreFrequency array by going through the unordered scores array
+    unorderedScores.forEach( score => {
+        scoreFrequency[score]++;
+    });
+
+    let sortedScores = [];
+
+    for (let score = scoreFrequency.length - 1; score >= 0; score--) {
+        const frequency = scoreFrequency[score];
+
+        for(let i=0; i < frequency; i++){
+            sortedScores.push(score);
+        }
+    }
   
-    return unorderedScores;
+    return sortedScores;
   }
   
   
