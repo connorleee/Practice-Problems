@@ -1,3 +1,5 @@
+// Can only be used with sorted arrays
+
 function binarySearch(target, nums) {
     let floorIdx = -1;
     let ceilingIdx = nums.length;
