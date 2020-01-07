@@ -1,15 +1,31 @@
 function findRotationPoint(words) {
+    const firstWord = words[0];
 
     // Find the rotation point in the vector
+    let floorIdx = 0;
+    let ceilingIdx = words.length - 1;
     
-  
+    while(floorIdx < ceilingIdx) {
+        const distance = ceilingIdx - floorIdx;
+        const halfIdx = Math.floor(distance / 2);
+        const guessIdx = floorIdx + halfIdx;
+
+        // condition where first word is later in dictionary than second word
+        if(words[guessIdx] >= firstWord) {
+            floorIdx = guessIdx;
+        } else {
+            ceilingIdx = guessIdx;
+        }
+
+        if(floorIdx + 1 === ceilingIdx){
+            return ceilingIdx;
+        }
+    }
+
     return false;
   }
   
    
-  
-  
-  
   
   
   // Tests
