@@ -63,10 +63,6 @@ function isBalanced(treeRoot) {
 
 
 
-
-
-
-
 // Tests
 
 let desc = 'full tree';
