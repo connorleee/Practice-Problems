@@ -23,25 +23,35 @@ function isBinarySearchTree(treeRoot) {
         return true;
     }
 
-    let queue = [];
-    queue.push(treeRoot);
+    let stack = [];
+    stack.push({
+        node: treeRoot, 
+        lowerBound: Number.NEGATIVE_INFINITY,
+        upperBound: Number.POSITIVE_INFINITY
+    });
 
-    while (queue.length) {
-        const node = queue.shift(); //expensive to shift...
-
-        if (node.left) {
-            if (node.left.value > node.value) {
-                return false;
-            }
-            queue.push(node.left);
+    while(stack.length) {
+        const {node, lowerBound, upperBound} = stack.pop();
+        
+        if( node.value <= lowerBound || node.value >= upperBound) {
+            return false;
         }
 
-        if (node.right) {
-            if (node.right.value < node.value) {
-                return false;
-            }
-            queue.push(node.right)
+        if(node.left) {
+            stack.push({
+                node: node.left,
+                lowerBound,
+                upperBound: node.value
+            })
         }
+        if(node.right){
+            stack.push({
+                node: node.right,
+                lowerBound: node.value,
+                upperBound
+            })
+        }
+        
     }
 
     return true;
