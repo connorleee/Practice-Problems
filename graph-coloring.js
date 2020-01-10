@@ -9,7 +9,29 @@ class GraphNode {
 function colorGraph(graph, colors) {
 
     // Create a valid coloring for the graph
+    graph.forEach(node => {
+        const illegalColors = new Set();
 
+        node.neighbors.forEach(neighbor => {
+            if(neighbor.label === node.label) {
+                throw new Error("LOOOOOP")
+            }
+
+            if(neighbor.color !== null ) {
+                illegalColors.add(neighbor.color);
+            }
+        })
+
+        const legalColors = [];
+
+        colors.forEach(color => {
+            if(!illegalColors.has(color)) {
+                legalColors.push(color);
+            }
+        })
+
+        node.color = legalColors[0];
+    })
     
 }
 
