@@ -5,7 +5,8 @@ var numIslands = function (grid) {
         for (let x = 0; x < grid[y].length; x++) {
             // if we find a 1, then initiate a depth first search for 1's and change all item's it touches to 0. 
             // incriment island count
-            if (grid[y][x] === 1) {
+
+            if (grid[y][x] === "1") {
                 let piecesOfLand = [];
                 piecesOfLand.push([x, y]);
 
@@ -14,18 +15,30 @@ var numIslands = function (grid) {
                     const xCoord = currentPieceOfLand[0];
                     const yCoord = currentPieceOfLand[1];
 
-                    if (grid[yCoord + 1][xCoord] === 1) {
+                    //Check if the next y value has a 1                 
+                    if (grid[yCoord + 1] !== undefined && grid[yCoord + 1][xCoord] === "1") {
                         piecesOfLand.push([xCoord, yCoord + 1])
-                        grid[yCoord + 1][xCoord] = 0;
+                        grid[yCoord + 1][xCoord] = "0";
+                    }
+                    
+                    if (grid[yCoord - 1] !== undefined && grid[yCoord - 1][xCoord] === "1") {
+                        piecesOfLand.push([xCoord, yCoord - 1])
+                        grid[yCoord - 1][xCoord] = "0";
                     }
 
-                    if (grid[yCoord][xCoord + 1] === 1) {
+                    //Check if the next x value has a 1
+                    if (grid[yCoord][xCoord + 1] !== undefined && grid[yCoord][xCoord + 1] === "1") {
                         piecesOfLand.push([xCoord + 1, yCoord])
-                        grid[yCoord][xCoord + 1] = 0;
+                        grid[yCoord][xCoord + 1] = "0";
+                    }
+                    
+                    if (grid[yCoord][xCoord - 1] !== undefined && grid[yCoord][xCoord - 1] === "1") {
+                        piecesOfLand.push([xCoord - 1, yCoord])
+                        grid[yCoord][xCoord - 1] = "0";
                     }
                 }
 
-                islandCount++
+                islandCount += 1;
             }
         }
     }
@@ -33,4 +46,4 @@ var numIslands = function (grid) {
     return islandCount;
 };
 
-numIslands([["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]);
+console.log(numIslands([["1", "1", "1", "1", "0"], ["1", "1", "0", "1", "0"], ["1", "1", "0", "0", "0"], ["0", "0", "0", "0", "0"]]))
