@@ -1,6 +1,6 @@
 let addTwoNumbers = function(l1, l2) {
     let currentNode = new ListNode(0);
-    let result = currentNode.next;
+    let result = currentNode;
 
     let sum = 0;
 
@@ -25,5 +25,5 @@ let addTwoNumbers = function(l1, l2) {
         currentNode.next = new ListNode(sum);
     }
 
-    return result;
+    return result.next;
 }
