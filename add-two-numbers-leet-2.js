@@ -1,5 +1,6 @@
 let addTwoNumbers = function(l1, l2) {
     let currentNode = new ListNode(0);
+    let result = currentNode.next;
 
     let sum = 0;
 
@@ -20,5 +21,9 @@ let addTwoNumbers = function(l1, l2) {
         sum = sum >= 10 ? 1 : 0;
     }
 
-    return currentNode.next();
+    if(sum) {
+        currentNode.next = new ListNode(sum);
+    }
+
+    return result;
 }
