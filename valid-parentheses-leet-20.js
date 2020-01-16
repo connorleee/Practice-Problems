@@ -2,31 +2,31 @@ let isValid = function (s) {
     if (s.length < 1) { return true }
 
     const stack = [];
+    let validFlag = false;
 
     for (let i = 0; i < s.length; i++) {
         const el = s[i];
         const lastInStack = stack[stack.length - 1];
 
-        switch (el) {
-            case el === ")":
-                if (lastInStack === "(") { stack.pop() }
-                break;
-
-            case el === "]":
-                if (lastInStack === "[") { stack.pop() }
-                break;
-
-            case el === "}":
-                if (lastInStack === "{") { stack.pop() }
-                break;
-
-            default:
-                stack.push(el)
-                break;
+        if(el === ")") {
+            if(lastInStack === "(") {stack.pop()}
+            else{stack.push(el)}
+            continue;
+        } else if(el === "]") {
+            if(lastInStack === "[") {stack.pop()} 
+            else{stack.push(el)}
+            continue;
+        } else if(el === "}") {
+            if(lastInStack === "{") {stack.pop()} 
+            else{stack.push(el)}
+            continue;
+        } else{
+            stack.push(el);
+            validFlag = true;
         }
     }
 
-    if (stack.length !== 0) { return false }
+    if (stack.length === 0 && validFlag === true) { return true }
 
-    return true;
+    return false;
 }
