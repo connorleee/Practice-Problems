@@ -11,10 +11,12 @@ let reorderLogFiles = function (logs) {
         const el = logs[i];
         logsSplit.push(el.split(" "));
     }
-
+    
     // filter the logs into one of two buckets
     for (let j = 0; j < logsSplit.length; j++) {
         const el = logsSplit[j];
+        
+        console.log(typeof el)
 
         // if we have a digit sequence
         if(parseInt(el[1])) {
@@ -24,23 +26,14 @@ let reorderLogFiles = function (logs) {
         }
     }
 
-    // for (let log = 0; log < letters.length; log++) {
-    //     const el = letters[log];
-    //     const [identifier, ...message] = el;
-
-    //     console.log(message)
-    // }
-
+    // need to sort the words
     letters.sort((a, b) => a[1].localeCompare(b[1]));
 
-    for(let k = 0; k < letters.length; k++) {
-        letters[k].join(" ");
-    }
-
-    results.push(letters);
-    results.push(digits);
+    results.push(...letters);
+    results.push(...digits);
 
     return results;
 };
 
-reorderLogFiles(["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"])
+console.log(reorderLogFiles(["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"])
+)
