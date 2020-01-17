@@ -6,13 +6,11 @@ let isHappy = function(n) {
 
         for(let i = 0; i < intArray.length; i++){
             const digit = parseInt(intArray[i]);
-            sum += el * el;
+            sum += digit * digit;
         }
 
         return sum;
     }
-
-    if(n === 1) return true;
 
     let numsSeen = new Set();
 
