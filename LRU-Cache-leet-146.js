@@ -31,7 +31,30 @@ LRUCache.prototype.get = function(key) {
  * @return {void}
  */
 LRUCache.prototype.put = function(key, value) {
-    
+    for (let i = 0; i < this.cache.length; i++) {
+        const el = this.cache[i];
+        
+        // first check if key exists and we can just update value
+        if(el[0] === key) {
+            el[1] = value; //update new value
+            const temp = this.cache.splice[1,0]; //since cache was touched, move to end of queue
+            this.cache.push(temp);
+            return
+        }
+
+        if(i === this.cache.length-1 && this.cache.length === this.capacity) {
+            this.cache.shift();
+            this.cache.push([key,value]);
+            return
+        }
+    }
+
+    if(this.cache.length < this.capacity) {
+        this.cache.push([key,value]);
+        return
+    }
+
+    throw new Error("something wrong with the put function")
 };
 
 /** 
