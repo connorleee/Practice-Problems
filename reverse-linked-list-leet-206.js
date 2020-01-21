@@ -6,7 +6,7 @@ const reverseList = function(head) {
     while(currentNode !== null) {
         let next = currentNode.next;
 
-        currentNode = previousNode;
+        currentNode.next = previousNode;
 
         previousNode = currentNode;
 
