@@ -2,55 +2,31 @@
  * @param {number[][]} grid
  * @return {number}
  */
-const orangesRotting = function(grid) {
+
+// 0 empty
+// 1 fresh
+// 2 rotten
+
+const orangesRotting = function (grid) {
+    if (!grid.length || !grid[0].length) return -1;
+
     let depth = 0;
     let queue = [];
+    let fresh = 0; //will use this as a check to see if any fresh remain after contamination
 
-    const foundRotten = (row, col) => {
-        queue.push([row, col]);
-        grid[row][col] = 0;
-    }
-
-    for(let row = 0; row < grid.length; row++){
-        for(let col = 0; col < grid[row].length; col++) {
-            const el = grid[row][col];
-
-            // found the first rotten orange
-            if(el === 2) {
-                queue.push([row, col]);
-                depth++;
-                grid[row][col] = 0; //any item touched will be turned back to 0 so we don't touch it again.
+    //Loop through the grid and count fresh oranges and load queue with rotten oranges
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[i].length; j++) {
+            if (grid[i][j] === 1) {
+                fresh++;
             }
-
-            while(queue.length) {
-                const current = queue.shift();
-                const y = current[0];
-                const x = current[1]
-
-                // check right
-                if( grid[y][x + 1] === 1 ) {
-                    foundRotten(x + 1, y);
-                }
-                
-                // check left
-                if( grid[y][x-1] === 1) {
-                    foundRotten(x-1, y);
-                }
-
-                // check down
-                if( grid[y + 1][x] === 1) {
-                    foundRotten(y+1, x);
-                }
-
-                // check up
-                if( grid[y - 1][x] === 1) {
-                    foundRotten(y-1, x);
-                }
-
-                depth++
+            if (grid[i][j] === 2) {
+                queue.push([i, j]);
             }
         }
     }
 
     return depth;
 };
+
+orangesRotting([[2,1,1],[1,1,0],[0,1,1]])
