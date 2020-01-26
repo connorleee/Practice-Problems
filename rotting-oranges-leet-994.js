@@ -10,13 +10,16 @@
 const orangesRotting = function (grid) {
     if (!grid.length || !grid[0].length) return -1;
 
+    const row = grid.length;
+    const col = grid[0].length;
+
     let depth = 0;
     let queue = [];
     let fresh = 0; //will use this as a check to see if any fresh remain after contamination
 
     //Loop through the grid and count fresh oranges and load queue with rotten oranges
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid[i].length; j++) {
+    for (let i = 0; i < row; i++) {
+        for (let j = 0; j < col; j++) {
             if (grid[i][j] === 1) {
                 fresh++;
             }
@@ -44,7 +47,7 @@ const orangesRotting = function (grid) {
 
                 // check if each movement is valid. if so, then check orange status
                 // movement must be on the grid. so need to check left and right for x and up and down for y
-                if (x2 >= grid.length || y2 >= grid.length || x2 < 0 || y2 < 0 || grid[x2][y2] !== 1) {
+                if (x2 >= row || y2 >= col || x2 < 0 || y2 < 0 || grid[x2][y2] !== 1) {
                     continue; //if invalid movement, skip remainder of this loop
                 }
 
@@ -61,4 +64,4 @@ const orangesRotting = function (grid) {
     return fresh ? -1 : depth; //check if there are any remaining fresh oranges that weren't able to be touched
 };
 
-console.log(orangesRotting([[2, 1, 1], [1, 1, 0], [0, 1, 1]]))
+console.log(orangesRotting([[2,1,0,2]]))
