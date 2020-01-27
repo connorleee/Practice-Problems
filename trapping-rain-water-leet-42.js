@@ -31,24 +31,20 @@
 const trap = function (height) {
     let waterArea = 0;
     let left = 0;
-    let right = 0;
-    let currentMaxH = 0;
+    let right = height.length - 1;
+    let leftMax = 0;
+    let rightMax = 0;
 
-    while(right < height.length - 1) {   
-        // increment the right pointer until you find peak. set pointers then
-        if(height[right] > height[right + 1]) { 
-            // if you find the right peak is lower than the left peak, just subtract delta height * distance from the water area
-            if(height[right] < height[left]){
-                waterArea -= (height[left] - height[right]) * (right - left) - 1;
-                
-            };
+    while (left < right) {
+        if (height[left] <= height[right]) {
+            height[left] > leftMax ? leftMax = height[left] : waterArea += leftMax - height[left];
 
-            left = right;
-            currentMaxH = height[right];
+            left++;
+        } else {
+            height[right] > rightMax ? rightMax = height[right] : waterArea += rightMax - height[right];
+
+            right--;
         }
-
-        waterArea += currentMaxH - height[right];
-        right++;
     }
 
     return waterArea;
