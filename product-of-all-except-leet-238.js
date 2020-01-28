@@ -18,9 +18,11 @@ const productExceptSelf = function (nums) {
     // multiply by products after index
     for (let j = nums.length - 1; j >= 0; j--) {
         const el = nums[j];
-        result[i] *= productSoFar;
+        result[j] *= productSoFar;
         productSoFar *= el;
     }
 
     return result;
 };
+
+console.log(productExceptSelf([1,2,3,4]))
