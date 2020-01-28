@@ -34,29 +34,34 @@
 // };
 
 const findMedianSortedArrays = function (nums1, nums2) {
-    
-    let minArr = nums1.length <= nums2.length ? nums1 : nums2;
-    
-    let start = 0;
-    let end = minArr.length;
-    let partitionX = Math.floor((end - start) / 2);
-    let partitionY = (nums1.length + nums2.length)/2 - partitionX;
-    let median;
+    if(nums1.length > nums2.length) return findMedianSortedArrays( nums2, nums1);
 
-    while(start < end) {
-        if(nums1[partitionX] <= nums2[partitionY + 1] && nums2[partitionY] <= nums1[partitionX + 1]) {
-            median = nums1.length + nums2.length % 2 === 1 
-                ? Math.max(nums1[partitionX], nums2[partitionY]) 
-                : (Math.max(nums1[partitionX], nums2[partitionY]) + Math.min(nums1[partitionX + 1], nums2[partitionY + 1])) / 2;
+    const x = nums1.length, y = nums2.length;
+    let start = 0;
+    let end = nums1.length;
+    
+    let median;
+    
+    while(start <= end) {
+        let partitionX = (end + start) / 2 | 0;
+        let partitionY = (x + y + 1) / 2 - partitionX | 0;
+    
+        let maxLeftX = partitionX === 0 ? -Infinity : nums1[partitionX - 1];
+        let minRightX = partitionX === x ? Infinity : nums1[partitionX];
+        let maxLeftY = partitionY === 0 ? -Infinity : nums2[partitionY - 1];
+        let minRightY = partitionY === y ? Infinity : nums2[partitionY];   
+
+        if(maxLeftX <= minRightY && maxLeftY <= minRightX) {
+            median = (x + y) % 2 === 1 
+                ? Math.max(maxLeftX, maxLeftY) 
+                : (Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2;
             return median;
-        } else if(nums1[partitionX] > nums2[partitionY + 1]) {
+        } else if(maxLeftX > minRightY) {
             end = partitionX - 1;
         } else {
             start = partitionX + 1;
         }
     }
-
-    throw new Error("oops")
 };
 
-findMedianSortedArrays([3], [-2, -1])
+console.log(findMedianSortedArrays([3, 4], [1, 2]))
