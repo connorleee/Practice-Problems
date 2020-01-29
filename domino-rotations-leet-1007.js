@@ -60,14 +60,15 @@ var minDominoRotations = function (A, B) {
 
         return Math.min(rotationsA, rotationsB);
     }
-    
+
     let a = A[0], b = B[0];
 
     if(a === b) return rotationCheck(A, B, a); //target domino values are same top and bottom. only need to check one condition
 
     return Math.max(rotationCheck(A, B, a), rotationCheck(A, B, b))
-
 };
+
+
 console.log(minDominoRotations([2, 1, 2, 4, 2, 2], [5, 2, 6, 2, 3, 2]));
 console.log(minDominoRotations([3, 5, 1, 2, 3], [3, 6, 3, 3, 4]))
 console.log(minDominoRotations([2, 1, 1, 3, 2, 1, 2, 2, 1], [3, 2, 3, 1, 3, 2, 3, 3, 2])) //-1
