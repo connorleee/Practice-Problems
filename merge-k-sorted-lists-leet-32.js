@@ -10,6 +10,8 @@
  * @return {ListNode}
  */
 var mergeKLists = function(lists) {
+    if(lists.length === 0) return null
+
     var merge2Lists = function(L1, L2) {
         let dummyHead = new ListNode(-1);
 
@@ -39,7 +41,7 @@ var mergeKLists = function(lists) {
     let result = lists.pop();
     
     while(lists.length) {
-        let nextNode = list.pop();
+        let nextNode = lists.pop();
 
         result = merge2Lists(result, nextNode);
     }
