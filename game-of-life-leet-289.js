@@ -7,14 +7,14 @@ var gameOfLife = function (board) {
     let rows = board.length;
     let cols = board[0].length;
 
-    let copyBoard = [];
+    let copyBoard = JSON.parse(JSON.stringify(board));
 
-    // populate the copied board
-    for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-            copyBoard[row][col] = board[row][col];
-        }
-    }
+    // // populate the copied board
+    // for (let row = 0; row < rows; row++) {
+    //     for (let col = 0; col < cols; col++) {
+    //         copyBoard[row][col] = board[row][col];
+    //     }
+    // }
 
     // loop through each item and find all live neighbors at each cell. if a 1, apply rules 1-3 logic. if a 0, apply rule 4
     for (let row = 0; row < rows; row++) {
@@ -26,12 +26,12 @@ var gameOfLife = function (board) {
                 for (let j = 0; j < neighbors.length; j++) {
 
                     // this will be used for validity check of adjacent cells.
-                    if (!(neighbors[i] === 0 && neigbors[j] === 0) && copyBoard[r][c] === 1) {
+                    if (!(neighbors[i] === 0 && neighbors[j] === 0)) {
                         let r = row + neighbors[i];
                         let c = col + neighbors[j];
 
                         //actual validity check
-                        if ((r < rows && r >= 0) && (c < cols && c >= 0)) {
+                        if ((r < rows && r >= 0) && (c < cols && c >= 0) && copyBoard[r][c] === 1) {
                             neighborCount++;
                         }
                     }
@@ -47,7 +47,7 @@ var gameOfLife = function (board) {
             }
 
             //check rule 4
-            if(copyBoard[row][col] === 0 && neighborCount === 3) {
+            if (copyBoard[row][col] === 0 && neighborCount === 3) {
                 board[row][col] = 1;
             }
         }
