@@ -42,10 +42,7 @@ var numEquivDominoPairs = function (dominoes) {
 
         let curDom = [a, b].join(",");
         
-        console.log(curDom);
-
         if (map.has(curDom)) {
-            console.log("found")
             count += map.get(curDom);
 
             map.set(curDom, map.get(curDom) + 1)
