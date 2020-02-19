@@ -9,10 +9,11 @@ var coinChange = function(coins, amount) {
     let total = 0;
     let count = 0;
 
+    if(amount === 0) return 0;
     if(coins[0] > amount) return -1;
     
     for(let i = coins.length - 1; i >= 0; i--) {
-        while(total + coins[i] < amount) {
+        while(total + coins[i] <= amount) {
             total += coins[i];
             count++;
         }
@@ -22,3 +23,6 @@ var coinChange = function(coins, amount) {
 
     return count;
 };
+
+console.log(coinChange([1,2,5], 11))
+console.log(coinChange([1,2,5], 0))
